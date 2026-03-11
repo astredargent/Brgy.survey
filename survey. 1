@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Community Safety Survey – Brgy. Poblacion 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #0f2847;
+    --blue: #1a5fa8;
+    --sky: #3b9edd;
+    --gold: #c8922a;
+    --cream: #faf7f2;
+    --white: #ffffff;
+    --gray: #6b7280;
+    --light: #e8f0f8;
+    --border: #d1dce8;
+    --success: #16a34a;
+    --red: #dc2626;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--cream);
+    color: var(--navy);
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .site-header {
+    background: linear-gradient(135deg, var(--navy) 0%, #1e3f6e 60%, #1a5fa8 100%);
+    color: white;
+    padding: 28px 20px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .site-header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -30px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(200,146,42,0.12);
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(200,146,42,0.25);
+    border: 1px solid rgba(200,146,42,0.5);
+    color: #f0c96a;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  .site-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 5vw, 26px);
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .site-header p {
+    font-size: 13px;
+    opacity: 0.75;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  /* ── Screens ── */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ── Landing ── */
+  .landing {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 32px 20px;
+  }
+  .intro-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 24px rgba(15,40,71,0.08);
+    margin-bottom: 24px;
+    border-left: 4px solid var(--gold);
+  }
+  .intro-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: var(--navy);
+  }
+  .intro-card p {
+    font-size: 14px;
+    color: #4b5563;
+    line-height: 1.7;
+  }
+  .intro-card .confidential {
+    margin-top: 12px;
+    font-size: 12.5px;
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .intro-card .confidential::before {
+    content: '🔒';
+    font-size: 14px;
+  }
+
+  .choose-label {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 14px;
+  }
+
+  .role-btn {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+  }
+  .role-btn:hover {
+    border-color: var(--blue);
+    box-shadow: 0 4px 16px rgba(26,95,168,0.15);
+    transform: translateY(-1px);
+  }
+  .role-btn .icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .role-btn.official .icon { background: linear-gradient(135deg, #1a3f6e, #1a5fa8); }
+  .role-btn.resident .icon { background: linear-gradient(135deg, #c8922a, #e8a83a); }
+  .role-btn .text h3 { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+  .role-btn .text p { font-size: 12.5px; color: var(--gray); }
+  .role-btn .arrow {
+    margin-left: auto;
+    color: var(--border);
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  /* ── Profile Form ── */
+  .profile-screen {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 28px 20px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .section-sub {
+    font-size: 13px;
+    color: var(--gray);
+    margin-bottom: 24px;
+  }
+
+  .form-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 24px rgba(15,40,71,0.07);
+    margin-bottom: 20px;
+  }
+  .form-group { margin-bottom: 18px; }
+  .form-group:last-child { margin-bottom: 0; }
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 7px;
+  }
+  .form-group label span { color: var(--red); }
+  .form-group input, .form-group select {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 9px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14px;
+    color: var(--navy);
+    background: var(--cream);
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+  .form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: var(--blue);
+    background: white;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  /* ── Survey Questions ── */
+  .survey-screen {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 28px 20px;
+  }
+
+  .progress-wrap {
+    background: var(--border);
+    border-radius: 10px;
+    height: 6px;
+    margin-bottom: 6px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue), var(--sky));
+    border-radius: 10px;
+    transition: width 0.4s ease;
+  }
+  .progress-label {
+    font-size: 12px;
+    color: var(--gray);
+    text-align: right;
+    margin-bottom: 20px;
+  }
+
+  .part-header {
+    background: linear-gradient(135deg, var(--navy), #1e4a82);
+    color: white;
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+  }
+  .part-header .part-tag {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 4px;
+  }
+  .part-header h3 { font-family: 'Playfair Display', serif; font-size: 17px; }
+
+  .scale-legend {
+    display: flex;
+    justify-content: space-between;
+    background: var(--light);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .scale-legend span {
+    font-size: 11px;
+    color: var(--blue);
+    font-weight: 600;
+  }
+
+  .question-card {
+    background: white;
+    border-radius: 14px;
+    padding: 18px 18px 14px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 12px rgba(15,40,71,0.06);
+    border: 1.5px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .question-card.answered { border-color: var(--sky); }
+  .question-card.unanswered-error { border-color: var(--red) !important; }
+
+  .question-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--navy);
+    margin-bottom: 14px;
+  }
+  .question-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--sky);
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+  }
+
+  .likert-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+  }
+  .likert-option { text-align: center; }
+  .likert-option input[type=radio] { display: none; }
+  .likert-option label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 8px 4px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    background: var(--cream);
+    transition: all 0.15s ease;
+    min-height: 56px;
+    justify-content: center;
+  }
+  .likert-option label .num {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gray);
+    line-height: 1;
+  }
+  .likert-option label .abbr {
+    font-size: 9.5px;
+    font-weight: 600;
+    color: var(--gray);
+    letter-spacing: 0.5px;
+  }
+  .likert-option input:checked + label {
+    background: var(--navy);
+    border-color: var(--navy);
+  }
+  .likert-option input:checked + label .num,
+  .likert-option input:checked + label .abbr { color: white; }
+  .likert-option label:hover {
+    border-color: var(--sky);
+    background: var(--light);
+  }
+
+  /* ── Buttons ── */
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--navy), var(--blue));
+    color: white;
+    box-shadow: 0 4px 16px rgba(15,40,71,0.25);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(15,40,71,0.3); }
+  .btn-secondary {
+    background: white;
+    color: var(--navy);
+    border: 2px solid var(--border);
+    margin-bottom: 10px;
+  }
+  .btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
+
+  .nav-row { display: flex; gap: 10px; margin-top: 20px; }
+  .nav-row .btn { flex: 1; }
+
+  /* ── Thank You ── */
+  .thanks-screen {
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    text-align: center;
+  }
+  .thanks-icon {
+    width: 80px; height: 80px;
+    background: linear-gradient(135deg, var(--success), #22c55e);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px;
+    margin: 0 auto 24px;
+    box-shadow: 0 8px 24px rgba(22,163,74,0.3);
+  }
+  .thanks-screen h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .thanks-screen p {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+  .another-btn {
+    background: linear-gradient(135deg, var(--navy), var(--blue));
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 32px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(15,40,71,0.2);
+  }
+
+  /* ── Results Panel (for researcher) ── */
+  .results-fab {
+    position: fixed;
+    bottom: 20px; right: 20px;
+    background: var(--gold);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 20px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(200,146,42,0.4);
+    z-index: 999;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: white;
+    border-radius: 20px 20px 0 0;
+    padding: 28px 20px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .modal h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+  .modal-sub { font-size: 13px; color: var(--gray); margin-bottom: 20px; }
+  .response-entry {
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    border-left: 3px solid var(--blue);
+  }
+  .response-entry .r-name { font-weight: 600; font-size: 13px; margin-bottom: 4px; }
+  .response-entry .r-meta { font-size: 12px; color: var(--gray); margin-bottom: 8px; }
+  .response-entry .r-scores { font-size: 12px; color: var(--navy); }
+  .empty-state { text-align: center; padding: 40px 20px; color: var(--gray); font-size: 14px; }
+  .modal-close {
+    position: absolute; top: 16px; right: 20px;
+    background: none; border: none;
+    font-size: 22px; cursor: pointer; color: var(--gray);
+  }
+  .modal-header { position: relative; }
+
+  .clear-btn {
+    display: block; width: 100%;
+    padding: 12px; margin-top: 16px;
+    background: none; border: 2px solid var(--red);
+    color: var(--red); border-radius: 10px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+  }
+
+  /* ── Utility ── */
+  .error-msg {
+    background: #fef2f2;
+    color: var(--red);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    display: none;
+    border: 1px solid #fecaca;
+  }
+  .error-msg.show { display: block; }
+
+  @media (max-width: 360px) {
+    .likert-option label { padding: 6px 2px; min-height: 50px; }
+    .likert-option label .num { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-badge">Academic Research Survey</div>
+  <h1>Community Protection & Safety Measures</h1>
+  <p>Barangay Poblacion 1, Hindang, Leyte &nbsp;·&nbsp; S.Y. 2025–2026</p>
+</header>
+
+<!-- SCREEN 1: LANDING -->
+<div class="screen active" id="screen-landing">
+  <div class="landing">
+    <div class="intro-card">
+      <h2>About This Survey</h2>
+      <p>This survey is part of a Senior High School research study that aims to assess the level of awareness and implementation of community protection and safety measures among barangay officials of Barangay Poblacion 1, Hindang, Leyte.</p>
+      <p class="confidential">All responses are confidential and will be used for academic purposes only.</p>
+    </div>
+
+    <p class="choose-label">I am a…</p>
+
+    <button class="role-btn official" onclick="selectRole('official')">
+      <div class="icon">🏛️</div>
+      <div class="text">
+        <h3>Barangay Official</h3>
+        <p>Captain, Kagawad, SK, Secretary, Treasurer, Tanod</p>
+      </div>
+      <div class="arrow">›</div>
+    </button>
+
+    <button class="role-btn resident" onclick="selectRole('resident')">
+      <div class="icon">🏘️</div>
+      <div class="text">
+        <h3>Resident</h3>
+        <p>18 years old and above, living in Brgy. Poblacion 1</p>
+      </div>
+      <div class="arrow">›</div>
+    </button>
+  </div>
+</div>
+
+<!-- SCREEN 2: PROFILE -->
+<div class="screen" id="screen-profile">
+  <div class="profile-screen">
+    <h2 class="section-title">Respondent Profile</h2>
+    <p class="section-sub">Please fill in your basic information. Name is optional.</p>
+
+    <div class="form-card">
+      <div class="form-group">
+        <label>Name <span style="color:var(--gray);font-weight:400">(Optional)</span></label>
+        <input type="text" id="p-name" placeholder="Leave blank if you prefer"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Age <span>*</span></label>
+          <input type="number" id="p-age" placeholder="e.g. 35" min="18" max="100"/>
+        </div>
+        <div class="form-group">
+          <label>Sex <span>*</span></label>
+          <select id="p-sex">
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Prefer not to say</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" id="official-fields">
+        <label>Position <span>*</span></label>
+        <select id="p-position">
+          <option value="">Select position</option>
+          <option>Barangay Captain</option>
+          <option>Barangay Councilor (Kagawad)</option>
+          <option>SK Chairman</option>
+          <option>Barangay Secretary</option>
+          <option>Barangay Treasurer</option>
+          <option>Barangay Tanod</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group" id="official-yrs">
+        <label>Years in Service <span>*</span></label>
+        <select id="p-yrs-service">
+          <option value="">Select range</option>
+          <option>Less than 1 year</option>
+          <option>1 – 3 years</option>
+          <option>4 – 6 years</option>
+          <option>7 years and above</option>
+        </select>
+      </div>
+      <div class="form-group" id="resident-fields" style="display:none">
+        <label>Years Living in Brgy. Poblacion 1 <span>*</span></label>
+        <select id="p-yrs-res">
+          <option value="">Select range</option>
+          <option>1 – 5 years</option>
+          <option>6 – 10 years</option>
+          <option>11 – 20 years</option>
+          <option>More than 20 years</option>
+        </select>
+      </div>
+      <div class="form-group" id="resident-purok" style="display:none">
+        <label>Purok / Sitio</label>
+        <input type="text" id="p-purok" placeholder="e.g. Purok 3"/>
+      </div>
+    </div>
+
+    <div class="error-msg" id="profile-error">Please fill in all required fields.</div>
+
+    <div class="nav-row">
+      <button class="btn btn-secondary" onclick="goTo('landing')">← Back</button>
+      <button class="btn btn-primary" onclick="startSurvey()">Continue →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 3: SURVEY PART I -->
+<div class="screen" id="screen-part1">
+  <div class="survey-screen">
+    <div class="progress-wrap"><div class="progress-bar" id="prog1" style="width:33%"></div></div>
+    <div class="progress-label">Part 1 of 2</div>
+
+    <div class="part-header">
+      <div class="part-tag">Part I</div>
+      <h3 id="part1-title">Awareness of Community Protection & Safety Measures</h3>
+    </div>
+
+    <div class="scale-legend">
+      <span>5 – Strongly Agree</span>
+      <span>4 – Agree</span>
+      <span>3 – Neutral</span>
+      <span>2 – Disagree</span>
+      <span>1 – Strongly Disagree</span>
+    </div>
+
+    <div id="part1-questions"></div>
+
+    <div class="error-msg" id="part1-error">Please answer all questions before proceeding.</div>
+
+    <div class="nav-row">
+      <button class="btn btn-secondary" onclick="goTo('profile')">← Back</button>
+      <button class="btn btn-primary" onclick="nextPart()">Next Part →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 4: SURVEY PART II -->
+<div class="screen" id="screen-part2">
+  <div class="survey-screen">
+    <div class="progress-wrap"><div class="progress-bar" style="width:66%"></div></div>
+    <div class="progress-label">Part 2 of 2</div>
+
+    <div class="part-header">
+      <div class="part-tag">Part II</div>
+      <h3 id="part2-title">Implementation of Community Protection & Safety Measures</h3>
+    </div>
+
+    <div class="scale-legend">
+      <span>5 – Strongly Agree</span>
+      <span>4 – Agree</span>
+      <span>3 – Neutral</span>
+      <span>2 – Disagree</span>
+      <span>1 – Strongly Disagree</span>
+    </div>
+
+    <div id="part2-questions"></div>
+
+    <div class="error-msg" id="part2-error">Please answer all questions before submitting.</div>
+
+    <div class="nav-row">
+      <button class="btn btn-secondary" onclick="goTo('part1')">← Back</button>
+      <button class="btn btn-primary" onclick="submitSurvey()">Submit Survey ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 5: THANK YOU -->
+<div class="screen" id="screen-thanks">
+  <div class="thanks-screen">
+    <div class="thanks-icon">✓</div>
+    <h2>Thank You!</h2>
+    <p>Your response has been recorded. Your participation in this research is greatly appreciated and will help improve community safety in Barangay Poblacion 1, Hindang, Leyte.</p>
+    <button class="another-btn" onclick="anotherResponse()">Submit Another Response</button>
+  </div>
+</div>
+
+<!-- FAB: View Results -->
+<button class="results-fab" onclick="openResults()">📊 View Results</button>
+
+<!-- Results Modal -->
+<div class="modal-overlay" id="results-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Survey Responses</h3>
+      <p class="modal-sub" id="results-count">Loading…</p>
+      <button class="modal-close" onclick="closeResults()">✕</button>
+    </div>
+    <div id="results-list"></div>
+    <button class="clear-btn" onclick="clearResults()">🗑 Clear All Responses</button>
+  </div>
+</div>
+
+<script>
+// ── Data ────────────────────────────────────────────────────────────────────
+
+const QUESTIONS = {
+  official: {
+    part1: {
+      title: "Awareness of Community Protection & Safety Measures",
+      items: [
+        "I am aware of existing laws and ordinances related to community safety (e.g., RA 10121 – DRRM Act, Fire Code, Anti-Violence laws).",
+        "I am knowledgeable about the barangay's roles and responsibilities in ensuring residents' safety.",
+        "I am aware of the Community-Based DRRM (CBDRRM) plans applicable to our barangay.",
+        "I know the proper protocols for responding to crimes, accidents, and emergencies in the community.",
+        "I am aware of the functions and programs of the Barangay Peace and Order Committee (BPOC).",
+        "I am familiar with required safety measures during public health emergencies such as epidemics.",
+        "I know the proper procedures for issuing Barangay Protection Orders (BPO) for victims of abuse."
+      ]
+    },
+    part2: {
+      title: "Implementation of Community Protection & Safety Measures",
+      items: [
+        "Our barangay regularly conducts information campaigns to educate residents about safety and emergency protocols.",
+        "The barangay has an active and functional Barangay Peace and Order Committee (BPOC) that meets regularly.",
+        "Our barangay has an updated and functioning BDRRM Plan.",
+        "The barangay conducts regular disaster preparedness drills and simulations (e.g., earthquake, typhoon, fire drills).",
+        "We ensure that barangay roads, evacuation routes, and public spaces are safe and accessible.",
+        "The barangay promptly responds to reported incidents of crime, violence, or emergencies.",
+        "The barangay maintains active coordination with the local police, BFP, and other safety agencies.",
+        "We implement programs that protect vulnerable groups (women, children, elderly, PWDs).",
+        "The barangay maintains an updated list of households for emergency response purposes.",
+        "The barangay has sufficient resources (first aid kits, emergency equipment, evacuation centers) readily available."
+      ]
+    }
+  },
+  resident: {
+    part1: {
+      title: "Perceived Awareness of Barangay Officials",
+      items: [
+        "Our barangay officials seem knowledgeable about laws and regulations on community safety and protection.",
+        "Our officials appear to understand their roles in maintaining peace, order, and safety in the barangay.",
+        "The barangay officials seem to know the proper procedures for responding to emergencies and disasters.",
+        "Our officials are aware of programs designed to protect vulnerable sectors (women, children, elderly, PWDs).",
+        "The barangay officials can clearly explain safety protocols and emergency procedures to residents.",
+        "Our officials appear to know how to coordinate with other agencies (police, BFP, health office) for community safety."
+      ]
+    },
+    part2: {
+      title: "Perceived Implementation of Community Protection & Safety Measures",
+      items: [
+        "The barangay regularly informs residents about safety measures and community protection programs.",
+        "Our barangay officials promptly respond to emergencies, crimes, or safety concerns reported by residents.",
+        "The barangay conducts disaster preparedness drills or community safety seminars.",
+        "Our officials ensure that public areas, roads, and evacuation routes are safe and maintained.",
+        "The barangay has active programs protecting women, children, elderly, and persons with disabilities.",
+        "Our officials coordinate effectively with police and other agencies to address peace and order.",
+        "The barangay has visible safety measures such as streetlights, evacuation centers, and first aid resources.",
+        "Our officials take action against illegal activities that threaten community safety.",
+        "The barangay provides timely assistance to residents affected by disasters or emergencies.",
+        "Overall, I feel safe and protected in our barangay because of our officials' efforts."
+      ]
+    }
+  }
+};
+
+// ── State ───────────────────────────────────────────────────────────────────
+
+let currentRole = '';
+let responses = [];
+
+function loadResponses() {
+  try {
+    const raw = localStorage.getItem('brgy_survey_responses');
+    if (raw) responses = JSON.parse(raw);
+  } catch(e) { responses = []; }
+}
+
+function saveResponse(entry) {
+  loadResponses();
+  responses.push(entry);
+  localStorage.setItem('brgy_survey_responses', JSON.stringify(responses));
+}
+
+// ── Navigation ───────────────────────────────────────────────────────────────
+
+function goTo(screenName) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + screenName).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ── Role Selection ────────────────────────────────────────────────────────────
+
+function selectRole(role) {
+  currentRole = role;
+  document.getElementById('official-fields').style.display = role === 'official' ? 'block' : 'none';
+  document.getElementById('official-yrs').style.display   = role === 'official' ? 'block' : 'none';
+  document.getElementById('resident-fields').style.display = role === 'resident' ? 'block' : 'none';
+  document.getElementById('resident-purok').style.display  = role === 'resident' ? 'block' : 'none';
+  goTo('profile');
+}
+
+// ── Profile Validation ────────────────────────────────────────────────────────
+
+function startSurvey() {
+  const age = document.getElementById('p-age').value;
+  const sex = document.getElementById('p-sex').value;
+  const err = document.getElementById('profile-error');
+
+  let valid = age && sex;
+  if (currentRole === 'official') {
+    valid = valid && document.getElementById('p-position').value && document.getElementById('p-yrs-service').value;
+  } else {
+    valid = valid && document.getElementById('p-yrs-res').value;
+  }
+
+  if (!valid) { err.classList.add('show'); return; }
+  err.classList.remove('show');
+
+  renderQuestions('part1', QUESTIONS[currentRole].part1);
+  renderQuestions('part2', QUESTIONS[currentRole].part2);
+  document.getElementById('part1-title').textContent = QUESTIONS[currentRole].part1.title;
+  document.getElementById('part2-title').textContent = QUESTIONS[currentRole].part2.title;
+  goTo('part1');
+}
+
+// ── Render Questions ──────────────────────────────────────────────────────────
+
+function renderQuestions(partId, partData) {
+  const container = document.getElementById(partId + '-questions');
+  container.innerHTML = '';
+  const labels = ['SD','D','N','A','SA'];
+
+  partData.items.forEach((q, i) => {
+    const qNum = i + 1;
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.id = `card-${partId}-${i}`;
+
+    let radios = '';
+    for (let v = 5; v >= 1; v--) {
+      radios += `
+        <div class="likert-option">
+          <input type="radio" name="${partId}_q${i}" id="${partId}_q${i}_v${v}" value="${v}" onchange="markAnswered('${partId}',${i})"/>
+          <label for="${partId}_q${i}_v${v}">
+            <span class="num">${v}</span>
+            <span class="abbr">${labels[v-1]}</span>
+          </label>
+        </div>`;
+    }
+
+    card.innerHTML = `
+      <div class="question-num">ITEM ${qNum}</div>
+      <div class="question-text">${q}</div>
+      <div class="likert-row">${radios}</div>`;
+    container.appendChild(card);
+  });
+}
+
+function markAnswered(partId, idx) {
+  const card = document.getElementById(`card-${partId}-${idx}`);
+  card.classList.add('answered');
+  card.classList.remove('unanswered-error');
+}
+
+// ── Validation ────────────────────────────────────────────────────────────────
+
+function validatePart(partId, numItems) {
+  let allAnswered = true;
+  for (let i = 0; i < numItems; i++) {
+    const answered = document.querySelector(`input[name="${partId}_q${i}"]:checked`);
+    const card = document.getElementById(`card-${partId}-${i}`);
+    if (!answered) {
+      card.classList.add('unanswered-error');
+      allAnswered = false;
+    }
+  }
+  return allAnswered;
+}
+
+function nextPart() {
+  const n = QUESTIONS[currentRole].part1.items.length;
+  const err = document.getElementById('part1-error');
+  if (!validatePart('part1', n)) { err.classList.add('show'); return; }
+  err.classList.remove('show');
+  goTo('part2');
+}
+
+// ── Submit ────────────────────────────────────────────────────────────────────
+
+function submitSurvey() {
+  const n2 = QUESTIONS[currentRole].part2.items.length;
+  const err = document.getElementById('part2-error');
+  if (!validatePart('part2', n2)) { err.classList.add('show'); return; }
+  err.classList.remove('show');
+
+  const n1 = QUESTIONS[currentRole].part1.items.length;
+  const p1scores = [], p2scores = [];
+
+  for (let i = 0; i < n1; i++) {
+    p1scores.push(+document.querySelector(`input[name="part1_q${i}"]:checked`).value);
+  }
+  for (let i = 0; i < n2; i++) {
+    p2scores.push(+document.querySelector(`input[name="part2_q${i}"]:checked`).value);
+  }
+
+  const wm1 = (p1scores.reduce((a,b)=>a+b,0)/n1).toFixed(2);
+  const wm2 = (p2scores.reduce((a,b)=>a+b,0)/n2).toFixed(2);
+
+  const entry = {
+    timestamp: new Date().toLocaleString('en-PH'),
+    role: currentRole,
+    name: document.getElementById('p-name').value || 'Anonymous',
+    age: document.getElementById('p-age').value,
+    sex: document.getElementById('p-sex').value,
+    position: currentRole === 'official' ? document.getElementById('p-position').value : null,
+    yrsService: currentRole === 'official' ? document.getElementById('p-yrs-service').value : null,
+    yrsRes: currentRole === 'resident' ? document.getElementById('p-yrs-res').value : null,
+    purok: currentRole === 'resident' ? document.getElementById('p-purok').value : null,
+    part1scores: p1scores,
+    part2scores: p2scores,
+    wm1, wm2
+  };
+
+  saveResponse(entry);
+  goTo('thanks');
+}
+
+// ── Another Response ──────────────────────────────────────────────────────────
+
+function anotherResponse() {
+  currentRole = '';
+  document.getElementById('p-name').value = '';
+  document.getElementById('p-age').value = '';
+  document.getElementById('p-sex').value = '';
+  document.getElementById('p-position').value = '';
+  document.getElementById('p-yrs-service').value = '';
+  document.getElementById('p-yrs-res').value = '';
+  document.getElementById('p-purok').value = '';
+  goTo('landing');
+}
+
+// ── Results Modal ─────────────────────────────────────────────────────────────
+
+function openResults() {
+  loadResponses();
+  const modal = document.getElementById('results-modal');
+  const list = document.getElementById('results-list');
+  const count = document.getElementById('results-count');
+
+  const officials = responses.filter(r => r.role === 'official');
+  const residents = responses.filter(r => r.role === 'resident');
+  count.textContent = `${responses.length} total response(s) — ${officials.length} official(s), ${residents.length} resident(s)`;
+
+  if (responses.length === 0) {
+    list.innerHTML = '<div class="empty-state">No responses yet. Share the survey with respondents to start collecting data.</div>';
+  } else {
+    list.innerHTML = responses.map((r, i) => `
+      <div class="response-entry">
+        <div class="r-name">${i+1}. ${r.name} &nbsp;<span style="font-weight:400;color:var(--gray)">${r.role === 'official' ? '🏛 Official' : '🏘 Resident'}</span></div>
+        <div class="r-meta">${r.timestamp} &nbsp;·&nbsp; ${r.age} yrs, ${r.sex} &nbsp;·&nbsp; ${r.role === 'official' ? r.position + ' · ' + r.yrsService : (r.purok || 'Poblacion 1') + ' · ' + r.yrsRes}</div>
+        <div class="r-scores">
+          Awareness WM: <strong>${r.wm1}</strong> &nbsp;|&nbsp;
+          Implementation WM: <strong>${r.wm2}</strong>
+        </div>
+      </div>`).join('');
+  }
+
+  modal.classList.add('open');
+}
+
+function closeResults() {
+  document.getElementById('results-modal').classList.remove('open');
+}
+
+function clearResults() {
+  if (confirm('Are you sure you want to delete all saved responses? This cannot be undone.')) {
+    localStorage.removeItem('brgy_survey_responses');
+    responses = [];
+    closeResults();
+  }
+}
+
+loadResponses();
+</script>
+</body>
+</html>
