@@ -1,2 +1,0 @@
-# Brgy.survey
-Survey
